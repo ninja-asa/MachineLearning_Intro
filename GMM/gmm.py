@@ -33,7 +33,7 @@ if __name__ == '__main__':
     dist2.generateMultiVarNormal(_mu = [1.5, 1], _cov = [ [3,0], [0, 1]])
     combined = dist1.combineData(dist2.data)
 	#TODO: Put it working for cases with _cov_xy = 0
-	
+	#TODO: Explore	
     bic = []
     lowest_bic = np.infty
     n_components_range = range(1, 7)
