@@ -15,7 +15,11 @@ import numpy as np
 
 class Supervised:
 	data = {}
+	train_X = None
+	train_y = None 
 	parameters = {}
+	coef = None
+	model = None
 	class Operation(Enum):
 		LINEAR_REG = 0
 		RIDGE_REG = 1
@@ -28,7 +32,6 @@ class Supervised:
 		self.parameters = _params
 		if (_operation == self.Operation.LINEAR_REG):
 			return (self.linear_regression())
-			
 	def linear_regression(self):
 		# Create feature matrix X
 		if('features' in self.parameters.keys()):
@@ -56,9 +59,17 @@ class Supervised:
 		ls_solution = linear_model.LinearRegression(True,
 									  normalize = True,
 									  n_jobs = -1)
-		
+		self.train_X = X
+		self.train_y = y
 		ls_solution.fit(X,y)
+		self.model = ls_solution
+		self.coef = ls_solution.coef_
 		print (ls_solution.score(X, y, sample_weight=None))
 		
 		
 		return ls_solution
+	
+	def predict(self,test = []):
+		if test == []:
+			test= self.train_X
+		return self.model.predict(test)
