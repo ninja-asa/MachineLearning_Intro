@@ -1,3 +1,4 @@
+# 
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
@@ -7,7 +8,6 @@ import matplotlib as mpl
 
 class DataGeneration:
     data = []
-    
     def generateMultiVarNormal(self,  _mu = [0, 1], _cov = [ [.5,0], [0, 2]], _samples_size = 100):
         self.data = np.random.multivariate_normal(_mu,_cov,_samples_size,'raise')
     def combineData(self, _new_input = []):
@@ -15,7 +15,7 @@ class DataGeneration:
     
 def showData(_data):
     if _data.shape[1]>2:
-        print 'Only works for 2D data points'
+        print ('Only works for 2D data points')
         return
     x = _data[:,0]
     y = _data[:,1]
@@ -29,11 +29,11 @@ if __name__ == '__main__':
     np.random.seed(0)
     dist1 = DataGeneration()
     dist2 = DataGeneration()
-    dist1.generateMultiVarNormal(_mu = [0, 1], _cov = [ [4,1], [1, 2]])
-    dist2.generateMultiVarNormal(_mu = [1.5, 1], _cov = [ [3,0], [0, 1]])
+    dist1.generateMultiVarNormal(_mu=[0, 1], _cov=[[4, 1], [1, 2]])
+    dist2.generateMultiVarNormal(_mu=[1.5, 1], _cov = [[3,0], [0,1]])
     combined = dist1.combineData(dist2.data)
-	#TODO: Put it working for cases with _cov_xy = 0
-	#TODO: Explore	
+    #TODO: Put it working for cases with _cov_xy = 0s
+    #TODO: Explore	
     bic = []
     lowest_bic = np.infty
     n_components_range = range(1, 7)
